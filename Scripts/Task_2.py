@@ -34,3 +34,49 @@ def find_log_files(directory: str | Path, extension: str = ".log") -> list[Path]
         elif item.is_file() and item.suffix == extension:
             found.append(item)
     return found
+
+
+with tempfile.TemporaryDirectory() as tmp:
+    tmp = Path(tmp)
+    for rel in ["2026/a/POS_01/x.log", "2026/a/POS_02/y.log", "2026/b/POS_01/z.log",
+                "2026/b/POS_01/notes.txt", "top.log"]:
+        file = tmp / rel
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_text("test")
+    found = find_log_files(tmp)
+
+assert sorted(p.name for p in found) == ["top.log", "x.log", "y.log", "z.log"]
+assert all(isinstance(p, Path) for p in found)
+print("find_log_files OK ->", sorted(p.name for p in found))
+
+
+def get_active_registers(node) -> set[str]:
+    """Return the ids of all registers with "active": true anywhere in a nested dict/list structure."""
+    active: set[str] = set()
+    if isinstance(node, dict):
+        if node.get("active") is True and isinstance(node.get("id"), str):
+            active.add(node["id"])
+        for value in node.values():
+            active |= get_active_registers(value)
+    elif isinstance(node, list):
+        for element in node:
+            active |= get_active_registers(element)
+    return active    # scalars: base case -> empty set
+
+example_config = {
+    "company": "Campus Coffee",
+    "regions": [{
+        "region_name": "Main Campus",
+        "stores": [{
+            "name": "Library Cafe",
+            "registers": [{"id": "POS_01", "active": True},
+                          {"id": "POS_02", "active": False}],
+        }],
+    }],
+}
+
+assert get_active_registers(example_config) == {"POS_01"}
+
+with open(DATA_DIR / "store_config.json", encoding="utf-8") as f:
+    store_config = json.load(f)
+print("get_active_registers OK -> active in store_config.json:", sorted(get_active_registers(store_config)))
