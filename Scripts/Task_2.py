@@ -1,5 +1,3 @@
-
-
 import json
 import re
 import tempfile
@@ -35,7 +33,7 @@ def find_log_files(directory: str | Path, extension: str = ".log") -> list[Path]
             found.append(item)
     return found
 
-
+" temporary test with assert, to check if the find_log_files function works as intended"
 with tempfile.TemporaryDirectory() as tmp:
     tmp = Path(tmp)
     for rel in ["2026/a/POS_01/x.log", "2026/a/POS_02/y.log", "2026/b/POS_01/z.log",
@@ -48,6 +46,12 @@ with tempfile.TemporaryDirectory() as tmp:
 assert sorted(p.name for p in found) == ["top.log", "x.log", "y.log", "z.log"]
 assert all(isinstance(p, Path) for p in found)
 print("find_log_files OK ->", sorted(p.name for p in found))
+
+"prints the .log files, so you can verify with the files in Data"
+log_files = sorted(find_log_files(DATA_DIR))
+print(f"\nFound {len(log_files)} .log files under {DATA_DIR}:")
+for log_file in log_files:
+    print(log_file.relative_to(DATA_DIR))
 
 
 def get_active_registers(node) -> set[str]:
@@ -63,6 +67,7 @@ def get_active_registers(node) -> set[str]:
             active |= get_active_registers(element)
     return active    # scalars: base case -> empty set
 
+" example test with assert, to check if the get_active_registers function works as intended"
 example_config = {
     "company": "Campus Coffee",
     "regions": [{
@@ -79,4 +84,5 @@ assert get_active_registers(example_config) == {"POS_01"}
 
 with open(DATA_DIR / "store_config.json", encoding="utf-8") as f:
     store_config = json.load(f)
-print("get_active_registers OK -> active in store_config.json:", sorted(get_active_registers(store_config)))
+print("get_active_registers OK -> active in store_config.json:",
+        sorted(get_active_registers(store_config)))
