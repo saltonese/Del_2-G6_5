@@ -19,7 +19,7 @@ OUTLIER_N_STD = 3.0     # |x - mean| > 3 * std  ->  hardware glitch
 #Task_3.1
 
 def remove_price_outliers(prices, n_std: float = OUTLIER_N_STD) -> np.ndarray:
-    """Replace values with |x - mean| > n_std * std by the median of the remaining (valid) values."""
+    """Replace values with |x - mean| > n_std * std by the median of the remaining valid values."""
     
     values = np.asarray(prices, dtype=float).ravel()
 

@@ -41,6 +41,7 @@ def generate_log_line(ts: datetime, reg_id: str) -> str:
 
 
 def create_dataset():
+    random.seed(42) # repodusble data for easier verifiaction within group
     start_time = datetime(2026, 10, 15, 7, 0, 0)
     file_idx = 0
 
