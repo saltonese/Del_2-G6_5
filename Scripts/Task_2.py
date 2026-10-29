@@ -1,14 +1,8 @@
 import json
-import re
 import tempfile
+
 from pathlib import Path
 
-#from Task_1 import read_log_file 
-#from Task_1 import parse_log_text
-
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
 
 DATA_DIR = Path.cwd() / "Data"
 OUTPUT_DIR = Path("output")
