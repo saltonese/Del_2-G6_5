@@ -17,10 +17,8 @@ EPSILON = 1e-6          # keeps the refund ratio finite when sales_count == 0
 NOK_CORRECTION = 10.0   # NOK prices were registered on the EUR scale
 OUTLIER_N_STD = 3.0     # |x - mean| > 3 * std  ->  hardware glitch
 
-print(f"pandas {pd.__version__} | numpy {np.__version__}")
-assert DATA_DIR.exists(), "Run `python generate_data_for_d2.py` first to create the Data/ folder."
 
-
+#Task_2.1
 
 def find_log_files(directory: str | Path, extension: str = ".log") -> list[Path]:
     """Recursively collect all files with the given extension below `directory`."""
@@ -53,7 +51,7 @@ print(f"\nFound {len(log_files)} .log files under {DATA_DIR}:")
 for log_file in log_files:
     print(log_file.relative_to(DATA_DIR))
 
-
+#Task_2.2
 def get_active_registers(node) -> set[str]:
     """Return the ids of all registers with "active": true anywhere in a nested dict/list structure."""
     active: set[str] = set()

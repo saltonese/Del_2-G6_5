@@ -18,7 +18,7 @@ OUTLIER_N_STD = 3.0     # |x - mean| > 3 * std  ->  hardware glitch
 print(f"pandas {pd.__version__} | numpy {np.__version__}")
 assert DATA_DIR.exists(), "Run `python generate_data_for_d2.py` first to create the Data/ folder."
 
-
+#Task 1.1
 def read_log_file(path: str | Path) -> tuple[str, str]:
     """Read a text file whose encoding is either UTF-8 or ISO-8859-1.
 
