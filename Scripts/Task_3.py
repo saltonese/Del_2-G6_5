@@ -34,4 +34,5 @@ def clean_prices(prices):
 
 def compute_refund_ratio(sales_count: np.ndarray, refund_count: np.ndarray) -> np.ndarray:
 
-    
+    refund_ratio = refund_count / (sales_count + 1e-6)  # Add a small epsilon to avoid division by zero
+    return refund_ratio
