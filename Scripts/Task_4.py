@@ -15,7 +15,7 @@ OUTLIER_N_STD = 3.0     # |x - mean| > 3 * std  ->  hardware glitch
 TRANSACTION_COLUMNS = ["timestamp", "register_id", "item", "price", "currency", "status"]
 STATUS_ORDER = ["SUCCESS", "REFUND", "CANCELLED"]
 
-
+#task 4.1
 def build_dataframe(records: list[dict]) -> pd.DataFrame:
     """List of transaction dicts -> DataFrame indexed by (sorted) datetime timestamp."""
     
@@ -24,13 +24,13 @@ def build_dataframe(records: list[dict]) -> pd.DataFrame:
     
     return df.set_index("timestamp").sort_index()
 
-
+#task_4.2
 def resample_hourly_revenue(df: pd.DataFrame) -> pd.Series:
     """Total price per item in 1-hour windows."""
     
     return df.groupby("item")["price"].resample("1h").sum().rename("revenue")
 
-
+#task 4.3
 def create_status_pivot(df: pd.DataFrame) -> pd.DataFrame:
     """Total revenue per item (rows) across the status categories (columns)."""
     
@@ -39,7 +39,7 @@ def create_status_pivot(df: pd.DataFrame) -> pd.DataFrame:
     
     return pivot.reindex(columns=STATUS_ORDER, fill_value=0.0)    # always all three columns
 
-
+#task 4.4
 def item_refund_ratios(df: pd.DataFrame) -> pd.DataFrame:
     """Refund ratio per item = refunds / (successful sales + epsilon)."""
     
@@ -53,7 +53,7 @@ def item_refund_ratios(df: pd.DataFrame) -> pd.DataFrame:
         index=counts.index,
     )
 
-
+# function test on made up data
 demo_records = [
     {"timestamp": "2026-10-15 08:30:00", "register_id": "POS_01", "item": "Latte",  "price": 4.5, "currency": "EUR", "status": "SUCCESS"},
     {"timestamp": "2026-10-15 07:10:00", "register_id": "POS_01", "item": "Latte",  "price": 4.0, "currency": "EUR", "status": "SUCCESS"},
