@@ -28,6 +28,7 @@ def read_log_file(path: str | Path) -> tuple[str, str]:
     """
     path = Path(path)
     raw = path.read_bytes()
+   
     try:
         return raw.decode("utf-8"), "utf-8"
     except UnicodeDecodeError:
@@ -73,6 +74,7 @@ def parse_log_text(text: str) -> list[dict]:
     records = []
     for line in text.splitlines():
         match = LOG_PATTERN.match(line.strip())
+        
         if match is None:
             continue  # noise or malformed line
         record = match.groupdict()
