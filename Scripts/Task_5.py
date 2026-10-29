@@ -41,14 +41,14 @@ def hourly_to_nested_dict(hourly: pd.Series) -> dict[str, dict[str, float]]:
 def run_pipeline(data_dir: Path = DATA_DIR, output_dir: Path = OUTPUT_DIR) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # 1. Discover log files and active registers
+    # task 5.1 
     log_files = sorted(find_log_files(data_dir))
     
     with open(data_dir / "store_config.json", encoding="utf-8") as f:
         active_registers = get_active_registers(json.load(f))
     print(f"[1/7] {len(log_files)} log files found, active registers: {sorted(active_registers)}")
 
-    # 2. Ingest + parse
+    # task 5.2
     records: list[dict] = []
     encodings: dict[str, str] = {}
     
@@ -60,30 +60,30 @@ def run_pipeline(data_dir: Path = DATA_DIR, output_dir: Path = OUTPUT_DIR) -> di
     records = [r for r in records if r["register_id"] in active_registers]
     print(f"[2/7] {n_parsed} records parsed, {n_parsed - len(records)} dropped (inactive register)")
 
-    # 3. DataFrame
+    # task 5.3
     raw_df = build_dataframe(records)
     print(f"[3/7] DataFrame built: {raw_df.shape[0]} rows, index {raw_df.index.min()} -> {raw_df.index.max()}")
 
-    # 4. Outlier cleaning (NumPy)
+    # task 5.4 
     df = raw_df.copy()
     cleaned_prices = remove_price_outliers(df["price"].to_numpy())
     n_outliers = int((cleaned_prices != df["price"].to_numpy()).sum())
     df["price"] = cleaned_prices
     print(f"[4/7] {n_outliers} outlier prices replaced by the median of the valid prices")
 
-    # 5. NOK correction
+    # task 5.5
     is_nok = df["currency"] == "NOK"
     df.loc[is_nok, "price"] = df.loc[is_nok, "price"] * NOK_CORRECTION
     df["price"] = df["price"].round(2)
     print(f"[5/7] {int(is_nok.sum())} NOK prices multiplied by {NOK_CORRECTION}")
 
-    # 6. Reports
+    # task 5.6
     hourly = resample_hourly_revenue(df)
     pivot = create_status_pivot(df)
     ratios = item_refund_ratios(df)
     print(f"[6/7] hourly revenue ({len(hourly)} item-hour rows), pivot {pivot.shape}, refund ratios {ratios.shape}")
 
-    # 7. Save
+    # task 5.7
     df.to_csv(output_dir / "cleaned_transactions.csv", index_label="timestamp")
     with open(output_dir / "hourly_revenue.json", "w", encoding="utf-8") as f:
         json.dump(hourly_to_nested_dict(hourly), f, indent=2)
