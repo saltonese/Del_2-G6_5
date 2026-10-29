@@ -20,7 +20,9 @@ OUTLIER_N_STD = 3.0     # |x - mean| > 3 * std  ->  hardware glitch
 
 def remove_price_outliers(prices, n_std: float = OUTLIER_N_STD) -> np.ndarray:
     """Replace values with |x - mean| > n_std * std by the median of the remaining (valid) values."""
+    
     values = np.asarray(prices, dtype=float).ravel()
+
     if values.size == 0:
         return values.copy()
 
@@ -28,6 +30,7 @@ def remove_price_outliers(prices, n_std: float = OUTLIER_N_STD) -> np.ndarray:
     is_outlier = np.abs(values - mean) > n_std * std
 
     cleaned = values.copy()
+    
     if is_outlier.any():
         cleaned[is_outlier] = np.median(values[~is_outlier])
     return cleaned
@@ -44,13 +47,16 @@ assert prices[-1] == 999.0                           # input not modified
 assert remove_price_outliers(list(prices)).shape == prices.shape   # also accepts lists
 print("remove_price_outliers OK")
 
+
 # Known limitation of the 3-sigma rule: with n <= 10 values it can never flag anything,
 # because the largest possible z-score is (n-1)/sqrt(n) < 3.
 print("n=4 :", remove_price_outliers([3.0, 4.0, 5.0, 999.0]))
 
+
 #Task_3.2
 def compute_refund_ratio(sales_count: np.ndarray, refund_count: np.ndarray) -> np.ndarray:
     """Element-wise refund ratio: refund_count / (sales_count + EPSILON)."""
+    
     sales = np.asarray(sales_count, dtype=float)
     refunds = np.asarray(refund_count, dtype=float)
     return refunds / (sales + EPSILON)

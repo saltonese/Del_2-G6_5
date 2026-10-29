@@ -22,8 +22,10 @@ OUTLIER_N_STD = 3.0     # |x - mean| > 3 * std  ->  hardware glitch
 
 def find_log_files(directory: str | Path, extension: str = ".log") -> list[Path]:
     """Recursively collect all files with the given extension below `directory`."""
+    
     directory = Path(directory)
     found: list[Path] = []
+    
     for item in directory.iterdir():
         if item.is_dir():
             found.extend(find_log_files(item, extension))   # recursive case
@@ -34,6 +36,7 @@ def find_log_files(directory: str | Path, extension: str = ".log") -> list[Path]
 " temporary test with assert, to check if the find_log_files function works as intended"
 with tempfile.TemporaryDirectory() as tmp:
     tmp = Path(tmp)
+    
     for rel in ["2026/a/POS_01/x.log", "2026/a/POS_02/y.log", "2026/b/POS_01/z.log",
                 "2026/b/POS_01/notes.txt", "top.log"]:
         file = tmp / rel
@@ -54,12 +57,15 @@ for log_file in log_files:
 #Task_2.2
 def get_active_registers(node) -> set[str]:
     """Return the ids of all registers with "active": true anywhere in a nested dict/list structure."""
+    
     active: set[str] = set()
+    
     if isinstance(node, dict):
         if node.get("active") is True and isinstance(node.get("id"), str):
             active.add(node["id"])
         for value in node.values():
             active |= get_active_registers(value)
+    
     elif isinstance(node, list):
         for element in node:
             active |= get_active_registers(element)
