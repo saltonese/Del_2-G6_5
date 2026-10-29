@@ -8,11 +8,11 @@ from Task_1 import read_log_file
 from Task_1 import parse_log_text
 from Task_2 import find_log_files
 from Task_2 import get_active_registers
-from Task_3_G import remove_price_outliers
-from Task_4_g import build_dataframe 
-from Task_4_g import resample_hourly_revenue
-from Task_4_g import create_status_pivot
-from Task_4_g import item_refund_ratios
+from Task_3 import remove_price_outliers
+from Task_4 import build_dataframe 
+from Task_4 import resample_hourly_revenue
+from Task_4 import create_status_pivot
+from Task_4 import item_refund_ratios
 
 
 print(Path.cwd())
