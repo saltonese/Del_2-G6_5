@@ -22,4 +22,9 @@ def creating_pivot_table(df):
     )
     return pivot_table
 
-def
+def calculate_ref_ratio(df):
+    success_ar = df[df["status"] == "SUCCESS"].groupby("item").size()
+    refund_ar = df[df["status"] == "REFUND"].groupby("item").size()
+
+    refund_ratio = calculate_refund_ratio(success_ar, refund_ar)
+    return refund_ratio
