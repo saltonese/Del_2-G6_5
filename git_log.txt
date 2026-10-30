@@ -1,0 +1,43 @@
+* a94c307 - Mathias Gundersen, 14 hours ago : typos and additions to summary
+* 3b34a0d - Mathias Gundersen, 14 hours ago : typo correction
+* b73d412 - Mathias Gundersen, 14 hours ago : Discussian and AI summary
+* ac1e8fb - Mathias Gundersen, 15 hours ago : added requierments
+* 91e08ec - Mathias Gundersen, 15 hours ago : addet plots and cleanup task_5
+* d69aed0 - Mathias Gundersen, 15 hours ago : Renamed files
+* 5c8abba - Mathias Gundersen, 15 hours ago : deleted duplicat files
+* 083e591 - Mathias Gundersen, 15 hours ago : Task_4 og 5 + added to nb + output files
+*   486e3bb - Mathias Gundersen, 17 hours ago : Merge branch 'main' of https://github.com/saltonese/Del_2-G6_5
+|\  
+| * eff0218 - Jakub-M-design, 17 hours ago : la til task 5
+| *   cdc73ce - Jakub-M-design, 17 hours ago : Merge branch 'main' of https://github.com/saltonese/Del_2-G6_5
+| |\  
+| * | b41efc7 - Jakub-M-design, 17 hours ago : endring oppg 4.4
+* | | 8f1961b - Mathias Gundersen, 17 hours ago : added seed 42 to gen data, added task_4 to NB
+| |/  
+|/|   
+* | 22afb6e - Mathias Gundersen, 18 hours ago : cleanup task_1 , 2 and 3
+|/  
+*   38f06bf - Jakub-M-design, 18 hours ago : Merge branch 'main' of https://github.com/saltonese/Del_2-G6_5
+|\  
+| *   7b5a7ad - Mathias Gundersen, 18 hours ago : Merge branch 'main' of https://github.com/saltonese/Del_2-G6_5
+| |\  
+| * | ca57d32 - Mathias Gundersen, 18 hours ago :  utkast til task_3 + task_2 cleanup
+* | | ce4cdd8 - Jakub-M-design, 18 hours ago : fullf├©ring av 3.2 funksjon
+| |/  
+|/|   
+* | da1eddd - Jakub-M-design, 18 hours ago : flere funksjoner laget p├Ñ oppgave 3 og 4
+|/  
+* 2bdfaf2 - Mathias Gundersen, 2 days ago : Added verification loop to check functions + comments
+*   4fea417 - Jakub-M-design, 2 days ago : Merge branch 'main' of https://github.com/saltonese/Del_2-G6_5
+|\  
+| * 851035e - Mathias Gundersen, 2 days ago : Started Tastk_2
+* | 8dacf59 - Jakub-M-design, 2 days ago : Jacub test
+* | 05db259 - Jakub-M-design, 2 days ago : task_2_JM
+|/  
+* ff79f3f - Mathias Gundersen, 2 days ago : Task 1 + begynt task 2
+* 3d0bf2c - Mathias Gundersen, 3 days ago : Endret path og la til print(cwd) for lettere nav
+* 26331c5 - Mathias Gundersen, 3 days ago : Intro task_1 i scripts + nb
+* 87506b7 - Mathias Gundersen, 3 days ago : Created data folder + uploaded gen_data script
+* d56b957 - Mathias Gundersen, 3 days ago : Created requierments file
+* b4c449f - Mathias Gundersen, 3 days ago : Made folders to organize future work
+* e935e8c - Mathias Gundersen, 3 days ago : Initial commit
